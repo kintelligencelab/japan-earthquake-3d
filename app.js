@@ -272,6 +272,26 @@ async function loadJapanMap() {
         );
 
         scene.add(terrainMesh);
+        const terrainOpacitySlider =
+            document.getElementById("terrainOpacity");
+
+const terrainOpacityValue =
+    document.getElementById("terrainOpacityValue");
+
+if (terrainOpacitySlider) {
+
+    terrainOpacitySlider.addEventListener("input", function () {
+
+        const opacity = this.value / 100;
+
+        terrainMaterial.opacity = opacity;
+
+        terrainOpacityValue.textContent =
+            this.value + "%";
+
+    });
+
+}
 
         console.log("Japan terrain loaded successfully");
 
