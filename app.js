@@ -575,21 +575,54 @@ resize();
 // FILTERS
 // ======================================================
 
-["magMin", "magMax", "depthMin", "depthMax", "yearMin", "yearMax"].forEach(id => {
-  document.getElementById(id).addEventListener("input", () => {
-    const value = document.getElementById(id).value;
-    const label = document.getElementById(id + "Label");
+const sliderPairs = [
+    ["magMin", "magMax", "magMinLabel", "magMaxLabel"],
+    ["depthMin", "depthMax", "depthMinLabel", "depthMaxLabel"],
+    ["yearMin", "yearMax", "yearMinLabel", "yearMaxLabel"]
+];
 
-    if (id.startsWith("mag")) {
-      label.textContent = Number(value).toFixed(1);
-    } else if (id.startsWith("depth")) {
-      label.textContent = value + " km";
-    } else {
-      label.textContent = value;
-    }
+sliderPairs.forEach(([minId, maxId, minLabelId, maxLabelId]) => {
 
-    loadPoints();
-  });
+    const minSlider = document.getElementById(minId);
+    const maxSlider = document.getElementById(maxId);
+
+    const updateLabels = () => {
+        const minValue = Number(minSlider.value);
+        const maxValue = Number(maxSlider.value);
+
+        document.getElementById(minLabelId).textContent =
+            minId.startsWith("mag")
+                ? minValue.toFixed(1)
+                : minId.startsWith("depth")
+                    ? minValue + " km"
+                    : minValue;
+
+        document.getElementById(maxLabelId).textContent =
+            maxId.startsWith("mag")
+                ? maxValue.toFixed(1)
+                : maxId.startsWith("depth")
+                    ? maxValue + " km"
+                    : maxValue;
+
+        loadPoints();
+    };
+
+    minSlider.addEventListener("input", () => {
+        if (Number(minSlider.value) > Number(maxSlider.value)) {
+            maxSlider.value = minSlider.value;
+        }
+
+        updateLabels();
+    });
+
+    maxSlider.addEventListener("input", () => {
+        if (Number(maxSlider.value) < Number(minSlider.value)) {
+            minSlider.value = maxSlider.value;
+        }
+
+        updateLabels();
+    });
+
 });
 
 // ======================================================
