@@ -644,6 +644,6 @@ animate();
 // START
 // ======================================================
 
-loadJapanMap();
+// loadJapanMap();
 
 loadEarthquakeData();
