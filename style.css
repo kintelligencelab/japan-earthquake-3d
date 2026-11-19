@@ -262,25 +262,24 @@ aside::-webkit-scrollbar-thumb {
 
 /* MOBILE */
 
-@media (max-width: 1000px) {
-
+@media (max-width: 700px) {
     #app {
-        height: auto !important;
-        min-height: 100vh;
         grid-template-columns: 1fr !important;
-        grid-template-rows: auto auto auto auto auto !important;
-        overflow: visible !important;
+    }
+
+    #controls {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+    }
+
+    main {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
     }
 
     #insights {
-        display: block !important;
         grid-column: 1 !important;
         grid-row: 4 !important;
-        height: auto !important;
-        min-height: 600px !important;
-        max-height: none !important;
-        overflow: visible !important;
-        padding-bottom: 40px !important;
     }
 
     #info {
