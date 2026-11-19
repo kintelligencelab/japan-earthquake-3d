@@ -199,7 +199,7 @@ async function loadJapanMap() {
 
                const y = elevation >= 0
                  ? elevation * 0.003
-                : Math.max(-4, elevation * 0.00035);
+                : Math.max(-20, elevation * 0.00035);
 
                 positions.push(x, y, z);
 
