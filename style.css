@@ -291,6 +291,13 @@ aside::-webkit-scrollbar-thumb {
         min-height: 600px !important;
     }
 
+
+     #info {
+        grid-column: 1 !important;
+        grid-row: 5 !important;
+    }
+    
+
     #insights {
         display: block !important;
         grid-column: 1 !important;
@@ -302,8 +309,4 @@ aside::-webkit-scrollbar-thumb {
         padding-bottom: 40px !important;
     }
 
-    #info {
-        grid-column: 1 !important;
-        grid-row: 5 !important;
-    }
 }
