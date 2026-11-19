@@ -256,16 +256,13 @@ async function loadJapanMap() {
         terrainGeometry.computeVertexNormals();
 
         // Create terrain material
-        const terrainMaterial = new THREE.MeshStandardMaterial({
-
+       const terrainMaterial = new THREE.MeshStandardMaterial({
             vertexColors: true,
-
             roughness: 1,
-
             metalness: 0,
-
-            side: THREE.DoubleSide
-
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 1
         });
 
         // Create terrain mesh
