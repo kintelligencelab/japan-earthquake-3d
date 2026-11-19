@@ -198,7 +198,7 @@ async function loadJapanMap() {
                     MAP_SCALE;
 
                const y = elevation >= 0
-            ? elevation * 0.015
+            ? elevation * 0.012
             : elevation * 0.001;
 
                 positions.push(x, y, z);
