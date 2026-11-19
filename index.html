@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Earthquake 3D Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div><h1>JAPAN EARTHQUAKE EXPLORER</h1><p>3D seismicity · USGS catalogue · 1970–2026</p></div>
+    <div id="status">Loading data…</div>
+  </header>
+  <aside id="controls">
+    <label>Minimum magnitude <span id="magLabel">3.0</span><input id="mag" type="range" min="3" max="9" step="0.1" value="3"></label>
+    <label>Maximum depth <span id="depthLabel">700 km</span><input id="depth" type="range" min="10" max="700" step="10" value="700"></label>
+    <label>Start year <span id="yearLabel">1970</span><input id="year" type="range" min="1970" max="2026" step="1" value="1970"></label>
+    <button id="reset">Reset view & filters</button>
+    <div class="legend"><b>Depth</b><div class="gradient"></div><div class="legendLabels"><span>Shallow</span><span>Deep</span></div></div>
+    <div class="help">Drag to rotate · Scroll to zoom · Right-drag to pan</div>
+  </aside>
+  <main id="scene"></main>
+  <section id="info"><b>Earthquake details</b><p>Click a point to inspect an earthquake.</p></section>
+</div>
+<script type="module" src="app.js"></script>
+</body></html>
