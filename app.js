@@ -26,6 +26,7 @@ const japanMaterial = new THREE.MeshBasicMaterial({
 });
 
 const japanMesh = new THREE.Mesh(japanGeometry, japanMaterial);
+japanMesh.rotation.x = -Math.PI / 2;
 japanMesh.position.y = -4;
 scene.add(japanMesh);
 const camera=new THREE.PerspectiveCamera(50,1,0.1,5000); camera.position.set(0,450,900);
