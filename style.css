@@ -294,14 +294,14 @@ aside::-webkit-scrollbar-thumb {
 
      #info {
         grid-column: 1 !important;
-        grid-row: 5 !important;
+        grid-row: 4 !important;
     }
     
 
     #insights {
         display: block !important;
         grid-column: 1 !important;
-        grid-row: 4 !important;
+        grid-row: 5 !important;
         height: auto !important;
         min-height: 600px !important;
         max-height: none !important;
