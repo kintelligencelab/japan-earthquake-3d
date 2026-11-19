@@ -184,31 +184,7 @@ async function loadJapanMap() {
 
             }
 
-            const mapGeometry = new THREE.ShapeGeometry(shape);
-
-            const mesh = new THREE.Mesh(
-                mapGeometry,
-                mapMaterial
-            );
-
-            mesh.rotation.x = -Math.PI / 2;
-
-            mesh.position.y = -5;
-
-            scene.add(mesh);
-
-            // Coastline outline
-            const coastlinePoints = outerRing.map(convertCoordinate);
-
-            const coastlineGeometry = new THREE.BufferGeometry()
-                .setFromPoints(coastlinePoints);
-
-            const coastline = new THREE.Line(
-                coastlineGeometry,
-                coastlineMaterial
-            );
-
-            scene.add(coastline);
+            // Map fill temporarily disabled
 
         }
 
@@ -644,6 +620,6 @@ animate();
 // START
 // ======================================================
 
-// loadJapanMap();
+loadJapanMap();
 
 loadEarthquakeData();
