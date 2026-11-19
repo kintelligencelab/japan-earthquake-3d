@@ -575,39 +575,21 @@ resize();
 // FILTERS
 // ======================================================
 
-["mag", "depth", "year"].forEach(id => {
+["magMin", "magMax", "depthMin", "depthMax", "yearMin", "yearMax"].forEach(id => {
+  document.getElementById(id).addEventListener("input", () => {
+    const value = document.getElementById(id).value;
+    const label = document.getElementById(id + "Label");
 
-    document.getElementById(id).addEventListener(
-        "input",
-        () => {
+    if (id.startsWith("mag")) {
+      label.textContent = Number(value).toFixed(1);
+    } else if (id.startsWith("depth")) {
+      label.textContent = value + " km";
+    } else {
+      label.textContent = value;
+    }
 
-            const value =
-                document.getElementById(id).value;
-
-            const label =
-                document.getElementById(id + "Label");
-
-            if (id === "mag") {
-
-                label.textContent =
-                    Number(value).toFixed(1);
-
-            } else if (id === "depth") {
-
-                label.textContent =
-                    value + " km";
-
-            } else {
-
-                label.textContent = value;
-
-            }
-
-            loadPoints();
-
-        }
-    );
-
+    loadPoints();
+  });
 });
 
 // ======================================================
