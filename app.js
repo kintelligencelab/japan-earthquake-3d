@@ -547,21 +547,22 @@ async function loadEarthquakeData() {
 
 function resize() {
 
-    const element = document.getElementById("scene");
+    const width = element.clientWidth;
+    const height = element.clientHeight;
 
-    camera.aspect =
-        element.clientWidth / element.clientHeight;
+    if (width === 0 || height === 0) return;
 
+    renderer.setSize(width, height);
+
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
-
-    renderer.setSize(
-        element.clientWidth,
-        element.clientHeight
-    );
 
 }
 
 window.addEventListener("resize", resize);
+
+const resizeObserver = new ResizeObserver(resize);
+resizeObserver.observe(element);
 
 resize();
 
