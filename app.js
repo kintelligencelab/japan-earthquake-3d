@@ -17,7 +17,8 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-document.getElementById("scene").appendChild(renderer.domElement);
+const sceneContainer = document.getElementById("scene");
+sceneContainer.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -547,22 +548,22 @@ async function loadEarthquakeData() {
 
 function resize() {
 
-    const width = element.clientWidth;
-    const height = element.clientHeight;
+    const width = sceneContainer.clientWidth;
+    const height = sceneContainer.clientHeight;
 
     if (width === 0 || height === 0) return;
 
-    renderer.setSize(width, height);
-
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
 
 }
 
 window.addEventListener("resize", resize);
 
 const resizeObserver = new ResizeObserver(resize);
-resizeObserver.observe(element);
+resizeObserver.observe(sceneContainer);
 
 resize();
 
