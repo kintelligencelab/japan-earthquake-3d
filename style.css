@@ -265,9 +265,11 @@ aside::-webkit-scrollbar-thumb {
 @media (max-width: 700px) {
 
     #app {
-        grid-template-columns: 1fr;
-        grid-template-rows: 70px auto minmax(400px, 1fr) auto auto;
-    }
+    height: auto;
+    min-height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto minmax(400px, 1fr) auto auto;
+}
 
     header {
         grid-column: 1;
