@@ -9,7 +9,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color("#080d16");
 
 const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 5000);
-camera.position.set(0, 300, 450);
+camera.position.set(0, 400, 500);
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true
