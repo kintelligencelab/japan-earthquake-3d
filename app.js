@@ -90,16 +90,16 @@ async function loadJapanMap() {
         const metadataResponse = await fetch("./japan_terrain.json");
 
         if (!metadataResponse.ok) {
-            throw new Error("Failed to load terrain metadata");
+            throw new Error("Cannot load japan_terrain.json");
         }
 
         const metadata = await metadataResponse.json();
 
-        // Load binary elevation data
+        // Load elevation data
         const terrainResponse = await fetch("./japan_terrain.bin");
 
         if (!terrainResponse.ok) {
-            throw new Error("Failed to load terrain data");
+            throw new Error("Cannot load japan_terrain.bin");
         }
 
         const buffer = await terrainResponse.arrayBuffer();
@@ -111,7 +111,7 @@ async function loadJapanMap() {
 
         const bounds = metadata.bounds;
 
-        // Reduce mesh resolution for better performance
+        // Reduce resolution for browser performance
         const stride = 2;
 
         const meshWidth = Math.floor(width / stride);
@@ -121,50 +121,51 @@ async function loadJapanMap() {
         const colours = [];
         const indices = [];
 
+        // Vertical exaggeration
         const terrainScale = 0.035;
 
-        function terrainColour(elevation) {
+        function getTerrainColour(elevation) {
 
             if (elevation < -6000) {
-                return new THREE.Color(0x061b38);
+                return [0.02, 0.08, 0.18];
             }
 
             if (elevation < -4000) {
-                return new THREE.Color(0x0b2d55);
+                return [0.04, 0.15, 0.30];
             }
 
             if (elevation < -2000) {
-                return new THREE.Color(0x123f70);
+                return [0.07, 0.24, 0.42];
             }
 
             if (elevation < -500) {
-                return new THREE.Color(0x1c5688);
+                return [0.12, 0.34, 0.52];
             }
 
             if (elevation < 0) {
-                return new THREE.Color(0x286b99);
+                return [0.20, 0.43, 0.58];
             }
 
             if (elevation < 200) {
-                return new THREE.Color(0x476b3c);
+                return [0.28, 0.42, 0.24];
             }
 
             if (elevation < 800) {
-                return new THREE.Color(0x658348);
+                return [0.38, 0.52, 0.30];
             }
 
             if (elevation < 1500) {
-                return new THREE.Color(0x8a8659);
+                return [0.53, 0.53, 0.36];
             }
 
             if (elevation < 2500) {
-                return new THREE.Color(0xa39a7c);
+                return [0.65, 0.60, 0.50];
             }
 
-            return new THREE.Color(0xd9d5c8);
+            return [0.85, 0.83, 0.78];
         }
 
-        // Generate terrain vertices
+        // Create terrain vertices
         for (let row = 0; row < meshHeight; row++) {
 
             for (let col = 0; col < meshWidth; col++) {
@@ -199,19 +200,18 @@ async function loadJapanMap() {
 
                 positions.push(x, y, z);
 
-                const colour = terrainColour(elevation);
+                const colour = getTerrainColour(elevation);
 
                 colours.push(
-                    colour.r,
-                    colour.g,
-                    colour.b
+                    colour[0],
+                    colour[1],
+                    colour[2]
                 );
 
             }
-
         }
 
-        // Generate terrain triangles
+        // Create triangles
         for (let row = 0; row < meshHeight - 1; row++) {
 
             for (let col = 0; col < meshWidth - 1; col++) {
@@ -227,9 +227,9 @@ async function loadJapanMap() {
                 );
 
             }
-
         }
 
+        // Create geometry
         const terrainGeometry = new THREE.BufferGeometry();
 
         terrainGeometry.setAttribute(
@@ -252,6 +252,7 @@ async function loadJapanMap() {
 
         terrainGeometry.computeVertexNormals();
 
+        // Create terrain material
         const terrainMaterial = new THREE.MeshStandardMaterial({
 
             vertexColors: true,
@@ -264,6 +265,7 @@ async function loadJapanMap() {
 
         });
 
+        // Create terrain mesh
         const terrainMesh = new THREE.Mesh(
             terrainGeometry,
             terrainMaterial
@@ -273,8 +275,7 @@ async function loadJapanMap() {
 
         console.log("Japan terrain loaded successfully");
 
-        status.textContent =
-            "Japan terrain loaded. Loading earthquake data...";
+        status.textContent = "Japan terrain loaded";
 
     } catch (error) {
 
@@ -285,6 +286,7 @@ async function loadJapanMap() {
     }
 
 }
+
 // ======================================================
 // EARTHQUAKE POINTS
 // ======================================================
