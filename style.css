@@ -219,10 +219,10 @@ main {
 }
 
 #insights h3 {
-    font-size: 15px;
-    letter-spacing: 1.5px;
-    color: #62b7ff;
-    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #e8edf5;
+    margin: 0 0 6px;
 }
 
 #insights section {
