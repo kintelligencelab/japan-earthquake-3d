@@ -272,6 +272,13 @@ aside::-webkit-scrollbar-thumb {
         overflow: visible !important;
     }
 
+    /* Header */
+    header {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+
+    /* Filters */
     #controls {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -284,24 +291,28 @@ aside::-webkit-scrollbar-thumb {
         gap: 20px !important;
     }
 
-    main {
+    /* 3D Earthquake scene */
+    #scene {
         grid-column: 1 !important;
         grid-row: 3 !important;
         height: 600px !important;
         min-height: 600px !important;
+        width: 100% !important;
     }
 
-
-     #info {
+    /* Earthquake details */
+    #info {
         grid-column: 1 !important;
         grid-row: 4 !important;
+        width: 100% !important;
     }
-    
 
+    /* Tectonic insights */
     #insights {
         display: block !important;
         grid-column: 1 !important;
         grid-row: 5 !important;
+        width: 100% !important;
         height: auto !important;
         min-height: 600px !important;
         max-height: none !important;
