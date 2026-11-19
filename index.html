@@ -8,7 +8,6 @@
 
 <link rel="stylesheet" href="style.css">
 
-
 <script type="importmap">
 {
   "imports": {
@@ -21,15 +20,21 @@
 <body>
 
 <div id="app">
+
+  <!-- HEADER -->
   <header>
     <div>
       <h1>JAPAN EARTHQUAKE EXPLORER</h1>
       <p>3D seismicity · USGS catalogue · 1970–2026</p>
     </div>
+
     <div id="status">Loading data…</div>
   </header>
 
+
+  <!-- LEFT CONTROLS -->
   <aside id="controls">
+
     <label>
       Minimum magnitude
       <span id="magLabel">3.0</span>
@@ -53,54 +58,122 @@
     <div class="legend">
       <b>Depth</b>
       <div class="gradient"></div>
+
       <div class="legendLabels">
         <span>Shallow</span>
         <span>Deep</span>
       </div>
     </div>
 
-
     <div class="filter-group terrain-opacity">
 
-    <label for="terrainOpacity">
+      <label for="terrainOpacity">
         <span>Terrain transparency</span>
         <span id="terrainOpacityValue">100%</span>
-    </label>
+      </label>
 
-    <input
+      <input
         type="range"
         id="terrainOpacity"
         min="0"
         max="100"
         value="100"
-    >
+      >
 
     </div>
 
-    
     <div class="help">
       Drag to rotate · Scroll to zoom · Right-drag to pan
     </div>
+
   </aside>
 
 
-<aside id="controls">
-    ...
-</aside>
+  <!-- RIGHT INSIGHTS PANEL -->
+  <aside id="insights">
 
-<aside id="insights">
-    ...
-</aside>
+    <h2>TECTONIC INSIGHTS</h2>
 
-<main id="scene"></main>
+    <section>
+      <h3>Earthquake Distribution</h3>
+      <p>
+        Most earthquakes around Japan occur offshore,
+        particularly along the Pacific coast. This
+        distribution reflects tectonic plate interactions
+        and major subduction zones.
+      </p>
+    </section>
 
-  
+    <section>
+      <h3>Plate Subduction</h3>
+      <p>
+        The Pacific Plate moves westward and subducts
+        beneath the tectonic plates surrounding Japan.
+        As the plate descends into the Earth's mantle,
+        it generates earthquakes at progressively
+        greater depths.
+      </p>
+    </section>
+
+    <section>
+      <h3>Wadati–Benioff Zone</h3>
+      <p>
+        The deep earthquake clusters visible in this
+        3D visualization form a descending seismic zone
+        known as the Wadati–Benioff Zone. This pattern
+        reveals the approximate geometry of the
+        subducting tectonic plate.
+      </p>
+    </section>
+
+    <section>
+      <h3>Deep Earthquake Activity</h3>
+      <p>
+        Earthquakes occurring hundreds of kilometres
+        below the surface are associated with the
+        descending plate. Their distribution provides
+        insight into the depth, angle and structure
+        of the subduction process.
+      </p>
+    </section>
+
+    <section>
+      <h3>Will Japan Sink?</h3>
+      <p>
+        Japan will not simply sink into the ocean.
+        Tectonic activity causes gradual deformation
+        and local uplift or subsidence, while Japan
+        sits on the overriding plate. Its geography
+        will evolve over millions of years through
+        tectonic movement, volcanic activity, erosion
+        and sea-level changes.
+      </p>
+    </section>
+
+    <div class="key-insight">
+      <h3>KEY INSIGHT</h3>
+      <p>
+        The 3D earthquake distribution reveals more
+        than earthquake locations—it provides a visual
+        representation of the underlying tectonic
+        structure and the descending Pacific Plate
+        beneath Japan.
+      </p>
+    </div>
+
+  </aside>
+
+
+  <!-- 3D SCENE -->
   <main id="scene"></main>
 
+
+  <!-- EARTHQUAKE INFORMATION -->
   <section id="info">
     <b>Earthquake details</b>
     <p>Click a point to inspect an earthquake.</p>
   </section>
+
 </div>
 
 <script type="module" src="app.js"></script>
