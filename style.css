@@ -284,9 +284,12 @@ aside::-webkit-scrollbar-thumb {
 }
 
     main {
-        grid-column: 1 !important;
-        grid-row: 3 !important;
-    }
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    width: 100% !important;
+    height: 700px !important;
+    min-height: 700px !important;
+}
 
     #insights {
         grid-column: 1 !important;
