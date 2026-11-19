@@ -325,14 +325,14 @@ function loadPoints() {
 
     }
 
-    const minMagnitude =
-        Number(document.getElementById("mag").value);
+const minMagnitude = Number(document.getElementById("magMin").value);
+const maxMagnitude = Number(document.getElementById("magMax").value);
 
-    const maxDepth =
-        Number(document.getElementById("depth").value);
+const minDepth = Number(document.getElementById("depthMin").value);
+const maxDepth = Number(document.getElementById("depthMax").value);
 
-    const startYear =
-        Number(document.getElementById("year").value);
+const startYear = Number(document.getElementById("yearMin").value);
+const endYear = Number(document.getElementById("yearMax").value);
 
     filtered = rows.filter(record => {
 
@@ -341,8 +341,12 @@ function loadPoints() {
 
         return (
             record.mag >= minMagnitude &&
+            record.mag <= maxMagnitude &&
+            record.depth >= minDepth &&
             record.depth <= maxDepth &&
-            earthquakeYear >= startYear
+            earthquakeYear >= startYear &&
+            earthquakeYear <= endYear
+);
         );
 
     });
