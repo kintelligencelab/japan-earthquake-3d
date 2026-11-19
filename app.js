@@ -9,7 +9,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color("#080d16");
 
 const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 5000);
-camera.position.set(0, 400, 500);
+camera.position.set(0, 450, 550);
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true
@@ -624,7 +624,7 @@ document.getElementById("reset").onclick = () => {
 
     document.getElementById("yearLabel").textContent = "1970";
 
-    camera.position.set(0, 600, 900);
+    camera.position.set(0, 450, 550);
 
     controls.target.set(0, 0, 0);
 
