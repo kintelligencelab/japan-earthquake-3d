@@ -597,27 +597,29 @@ resize();
 // ======================================================
 
 document.getElementById("reset").onclick = () => {
+  document.getElementById("magMin").value = 3;
+  document.getElementById("magMax").value = 9;
 
-    document.getElementById("mag").value = 3;
+  document.getElementById("depthMin").value = 0;
+  document.getElementById("depthMax").value = 700;
 
-    document.getElementById("depth").value = 700;
+  document.getElementById("yearMin").value = 1970;
+  document.getElementById("yearMax").value = 2026;
 
-    document.getElementById("year").value = 1970;
+  document.getElementById("magMinLabel").textContent = "3.0";
+  document.getElementById("magMaxLabel").textContent = "9.0";
 
-    document.getElementById("magLabel").textContent = "3.0";
+  document.getElementById("depthMinLabel").textContent = "0 km";
+  document.getElementById("depthMaxLabel").textContent = "700 km";
 
-    document.getElementById("depthLabel").textContent = "700 km";
+  document.getElementById("yearMinLabel").textContent = "1970";
+  document.getElementById("yearMaxLabel").textContent = "2026";
 
-    document.getElementById("yearLabel").textContent = "1970";
+  camera.position.set(0, 450, 550);
+  controls.target.set(0, 0, 0);
+  controls.update();
 
-    camera.position.set(0, 450, 550);
-
-    controls.target.set(0, 0, 0);
-
-    controls.update();
-
-    loadPoints();
-
+  loadPoints();
 };
 
 // ======================================================
