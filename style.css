@@ -285,3 +285,30 @@ aside::-webkit-scrollbar-thumb {
         font-size: 14px;
     }
 }
+
+
+.data-sources {
+    margin-top: auto;
+    font-size: 11px;
+    color: #8193a9;
+    line-height: 1.6;
+    border-top: 1px solid #26364b;
+    padding-top: 12px;
+}
+
+.data-sources p {
+    margin: 4px 0;
+}
+
+.data-sources strong {
+    color: #b9c7d8;
+}
+
+.data-sources a {
+    color: #62b7ff;
+    text-decoration: none;
+}
+
+.data-sources a:hover {
+    text-decoration: underline;
+}
