@@ -296,6 +296,8 @@ aside::-webkit-scrollbar-thumb {
         grid-column: 1;
         grid-row: 4;
         width: 100%;
+        min-height: 900px;
+        padding: 20px;
     }
 
     #info {
