@@ -1,0 +1,15 @@
+{
+  "file": "japan_terrain.bin",
+  "format": "signed int16, row-major, little-endian",
+  "width": 1600,
+  "height": 1400,
+  "bounds": {
+    "west": 127.5,
+    "south": 29.0,
+    "east": 147.5,
+    "north": 46.5
+  },
+  "source": "GEBCO 2026",
+  "resolution": "Downsampled from 15 arc-second grid",
+  "nodata": 0
+}
