@@ -60,6 +60,22 @@ aside {
 #controls {
     grid-column: 1;
     border-right: 1px solid #26364b;
+    min-height: 0;
+}
+
+.data-sources {
+    margin-top: auto;
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #8193a9;
+    line-height: 1.6;
+    border-top: 1px solid #26364b;
+    padding-top: 12px;
+}
+
+#controls {
+    grid-column: 1;
+    border-right: 1px solid #26364b;
 }
 
 #insights {
