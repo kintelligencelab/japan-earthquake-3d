@@ -1,1 +1,287 @@
-*{box-sizing:border-box}body{margin:0;background:#080d16;color:#e8edf5;font-family:Inter,Arial,sans-serif}#app{height:100vh;display:grid;grid-template-columns:280px 1fr;grid-template-rows:78px 1fr 105px}header{grid-column:1/3;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:#101827;border-bottom:1px solid #26364b}h1{font-size:18px;letter-spacing:2px;margin:0 0 6px}header p{margin:0;color:#8ea0b8;font-size:12px}#status{color:#9eb6d3;font-size:13px}aside{grid-row:2/4;background:#101827;padding:22px;border-right:1px solid #26364b;display:flex;flex-direction:column;gap:24px}label{font-size:13px;color:#cbd5e1}label span{float:right;color:#62b7ff}input{display:block;width:100%;margin-top:12px;accent-color:#4ea5ff}button{border:1px solid #3c526b;background:#1b2b40;color:#eaf2ff;padding:10px;border-radius:6px;cursor:pointer}button:hover{background:#29415e}.legend{font-size:12px;color:#b9c7d8}.gradient{height:12px;border-radius:8px;margin:10px 0;background:linear-gradient(90deg,#00d5ff,#00d084,#ffe600,#ff4a35,#ff00a8)}.legendLabels{display:flex;justify-content:space-between}.help{font-size:11px;color:#8193a9;line-height:1.5}main{position:relative;min-width:0;min-height:0}#scene canvas{display:block;width:100%;height:100%}#info{grid-column:2;background:#101827;border-top:1px solid #26364b;padding:14px 20px;font-size:13px;color:#b9c7d8}#info p{margin:7px 0}#info b{color:#fff}@media(max-width:700px){#app{grid-template-columns:1fr;grid-template-rows:70px 150px 1fr 100px}header{grid-column:1}aside{grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}main{grid-row:3}#info{grid-column:1;grid-row:4}h1{font-size:14px}}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080d16;
+    color: #e8edf5;
+    font-family: Inter, Arial, sans-serif;
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 280px 1fr 300px;
+    grid-template-rows: 78px 1fr 105px;
+}
+
+/* HEADER */
+
+header {
+    grid-column: 1 / 4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: #101827;
+    border-bottom: 1px solid #26364b;
+}
+
+h1 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin: 0 0 6px;
+}
+
+header p {
+    margin: 0;
+    color: #8ea0b8;
+    font-size: 12px;
+}
+
+#status {
+    color: #9eb6d3;
+    font-size: 13px;
+}
+
+/* SIDEBARS */
+
+aside {
+    grid-row: 2 / 4;
+    background: #101827;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+#controls {
+    grid-column: 1;
+    border-right: 1px solid #26364b;
+}
+
+#insights {
+    grid-column: 3;
+    border-left: 1px solid #26364b;
+    font-size: 12px;
+    line-height: 1.6;
+    gap: 16px;
+}
+
+/* CONTROLS */
+
+label {
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+label span {
+    float: right;
+    color: #62b7ff;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    accent-color: #4ea5ff;
+}
+
+button {
+    border: 1px solid #3c526b;
+    background: #1b2b40;
+    color: #eaf2ff;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #29415e;
+}
+
+/* DEPTH LEGEND */
+
+.legend {
+    font-size: 12px;
+    color: #b9c7d8;
+}
+
+.gradient {
+    height: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+    background: linear-gradient(
+        90deg,
+        #00d5ff,
+        #00d084,
+        #ffe600,
+        #ff4a35,
+        #ff00a8
+    );
+}
+
+.legendLabels {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* TERRAIN TRANSPARENCY */
+
+.terrain-opacity {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.terrain-opacity label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.terrain-opacity label span {
+    float: none;
+}
+
+.terrain-opacity input {
+    margin-top: 0;
+}
+
+/* HELP */
+
+.help {
+    font-size: 11px;
+    color: #8193a9;
+    line-height: 1.5;
+}
+
+/* 3D SCENE */
+
+main {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+}
+
+#scene canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* EARTHQUAKE INFO */
+
+#info {
+    grid-column: 2;
+    grid-row: 3;
+    background: #101827;
+    border-top: 1px solid #26364b;
+    padding: 14px 20px;
+    font-size: 13px;
+    color: #b9c7d8;
+}
+
+#info p {
+    margin: 7px 0;
+}
+
+#info b {
+    color: #fff;
+}
+
+/* TECTONIC INSIGHTS */
+
+#insights h2 {
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    color: #62b7ff;
+    margin: 0;
+}
+
+#insights h3 {
+    font-size: 12px;
+    color: #e8edf5;
+    margin: 0 0 6px;
+}
+
+#insights section {
+    border-bottom: 1px solid #26364b;
+    padding-bottom: 12px;
+}
+
+#insights p {
+    margin: 0;
+    color: #9eb0c5;
+}
+
+.key-insight {
+    background: #17263a;
+    border: 1px solid #31516f;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.key-insight h3 {
+    color: #62b7ff !important;
+}
+
+/* SCROLLBAR */
+
+aside::-webkit-scrollbar {
+    width: 5px;
+}
+
+aside::-webkit-scrollbar-track {
+    background: #101827;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: #34465d;
+    border-radius: 5px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    #app {
+        grid-template-columns: 1fr;
+        grid-template-rows: 70px 150px 1fr 100px;
+    }
+
+    header {
+        grid-column: 1;
+    }
+
+    #controls {
+        grid-column: 1;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 12px;
+        border-right: none;
+    }
+
+    #insights {
+        display: none;
+    }
+
+    main {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    #info {
+        grid-column: 1;
+        grid-row: 4;
+    }
+
+    h1 {
+        font-size: 14px;
+    }
+}
