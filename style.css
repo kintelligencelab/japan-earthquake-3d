@@ -264,30 +264,64 @@ aside::-webkit-scrollbar-thumb {
 
 @media (max-width: 700px) {
 
+    /* Main mobile layout */
     #app {
-        height: auto !important;
-        min-height: 100vh;
+        display: grid !important;
         grid-template-columns: 1fr !important;
         grid-template-rows: auto auto auto auto auto !important;
+        height: auto !important;
+        min-height: 100vh !important;
         overflow: visible !important;
     }
 
-     #info {
+    /* Header */
+    header {
         grid-column: 1 !important;
-        grid-row: 5 !important;
+        grid-row: 1 !important;
     }
 
-    
+    /* Controls */
+    #controls {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        padding: 12px !important;
+        border-right: none !important;
+    }
+
+    /* 3D earthquake graph */
+    main {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+        width: 100% !important;
+        min-height: 500px !important;
+    }
+
+    /* Earthquake details ABOVE insights */
+    #info {
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+        width: 100% !important;
+    }
+
+    /* Tectonic insights BELOW earthquake details */
     #insights {
         display: block !important;
         grid-column: 1 !important;
-        grid-row: 4 !important;
+        grid-row: 5 !important;
+        width: 100% !important;
         height: auto !important;
-        min-height: 600px !important;
+        min-height: 900px !important;
         max-height: none !important;
         overflow: visible !important;
         padding-bottom: 40px !important;
     }
 
-  
+    /* Heading */
+    h1 {
+        font-size: 14px !important;
+    }
+
 }
