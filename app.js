@@ -84,138 +84,207 @@ async function loadJapanMap() {
 
     try {
 
-        status.textContent = "Loading Japan map...";
+        status.textContent = "Loading Japan terrain...";
 
-        const url =
-            "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson";
+        // Load terrain metadata
+        const metadataResponse = await fetch("./japan_terrain.json");
 
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error("Failed to download geographical data");
+        if (!metadataResponse.ok) {
+            throw new Error("Failed to load terrain metadata");
         }
 
-        const geoData = await response.json();
+        const metadata = await metadataResponse.json();
 
-        const japan = geoData.features.find(feature => {
+        // Load binary elevation data
+        const terrainResponse = await fetch("./japan_terrain.bin");
 
-            const properties = feature.properties || {};
-
-            return (
-                properties.ADMIN === "Japan" ||
-                properties.name === "Japan" ||
-                properties.NAME === "Japan"
-            );
-
-        });
-
-        if (!japan) {
-            throw new Error("Japan was not found in GeoJSON");
+        if (!terrainResponse.ok) {
+            throw new Error("Failed to load terrain data");
         }
 
-        const mapMaterial = new THREE.MeshBasicMaterial({
-            color: 0x263b4d,
+        const buffer = await terrainResponse.arrayBuffer();
+
+        const elevations = new Int16Array(buffer);
+
+        const width = metadata.width;
+        const height = metadata.height;
+
+        const bounds = metadata.bounds;
+
+        // Reduce mesh resolution for better performance
+        const stride = 2;
+
+        const meshWidth = Math.floor(width / stride);
+        const meshHeight = Math.floor(height / stride);
+
+        const positions = [];
+        const colours = [];
+        const indices = [];
+
+        const terrainScale = 0.035;
+
+        function terrainColour(elevation) {
+
+            if (elevation < -6000) {
+                return new THREE.Color(0x061b38);
+            }
+
+            if (elevation < -4000) {
+                return new THREE.Color(0x0b2d55);
+            }
+
+            if (elevation < -2000) {
+                return new THREE.Color(0x123f70);
+            }
+
+            if (elevation < -500) {
+                return new THREE.Color(0x1c5688);
+            }
+
+            if (elevation < 0) {
+                return new THREE.Color(0x286b99);
+            }
+
+            if (elevation < 200) {
+                return new THREE.Color(0x476b3c);
+            }
+
+            if (elevation < 800) {
+                return new THREE.Color(0x658348);
+            }
+
+            if (elevation < 1500) {
+                return new THREE.Color(0x8a8659);
+            }
+
+            if (elevation < 2500) {
+                return new THREE.Color(0xa39a7c);
+            }
+
+            return new THREE.Color(0xd9d5c8);
+        }
+
+        // Generate terrain vertices
+        for (let row = 0; row < meshHeight; row++) {
+
+            for (let col = 0; col < meshWidth; col++) {
+
+                const originalRow = row * stride;
+                const originalCol = col * stride;
+
+                const index =
+                    originalRow * width + originalCol;
+
+                const elevation = elevations[index];
+
+                const longitude =
+                    bounds.west +
+                    (originalCol / (width - 1)) *
+                    (bounds.east - bounds.west);
+
+                const latitude =
+                    bounds.north -
+                    (originalRow / (height - 1)) *
+                    (bounds.north - bounds.south);
+
+                const x =
+                    (longitude - MAP_CENTER_LON) *
+                    MAP_SCALE;
+
+                const z =
+                    -(latitude - MAP_CENTER_LAT) *
+                    MAP_SCALE;
+
+                const y = elevation * terrainScale;
+
+                positions.push(x, y, z);
+
+                const colour = terrainColour(elevation);
+
+                colours.push(
+                    colour.r,
+                    colour.g,
+                    colour.b
+                );
+
+            }
+
+        }
+
+        // Generate terrain triangles
+        for (let row = 0; row < meshHeight - 1; row++) {
+
+            for (let col = 0; col < meshWidth - 1; col++) {
+
+                const a = row * meshWidth + col;
+                const b = a + 1;
+                const c = a + meshWidth;
+                const d = c + 1;
+
+                indices.push(
+                    a, c, b,
+                    b, c, d
+                );
+
+            }
+
+        }
+
+        const terrainGeometry = new THREE.BufferGeometry();
+
+        terrainGeometry.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(
+                positions,
+                3
+            )
+        );
+
+        terrainGeometry.setAttribute(
+            "color",
+            new THREE.Float32BufferAttribute(
+                colours,
+                3
+            )
+        );
+
+        terrainGeometry.setIndex(indices);
+
+        terrainGeometry.computeVertexNormals();
+
+        const terrainMaterial = new THREE.MeshStandardMaterial({
+
+            vertexColors: true,
+
+            roughness: 1,
+
+            metalness: 0,
+
             side: THREE.DoubleSide
+
         });
 
-        const coastlineMaterial = new THREE.LineBasicMaterial({
-            color: 0x6d8ba5
-        });
+        const terrainMesh = new THREE.Mesh(
+            terrainGeometry,
+            terrainMaterial
+        );
 
-        function convertCoordinate(coord) {
+        scene.add(terrainMesh);
 
-            const x = (coord[0] - MAP_CENTER_LON) * MAP_SCALE;
+        console.log("Japan terrain loaded successfully");
 
-            const z = -(coord[1] - MAP_CENTER_LAT) * MAP_SCALE;
-
-            return new THREE.Vector3(x, -5, z);
-        }
-
-        function createPolygon(polygonCoordinates) {
-
-            const outerRing = polygonCoordinates[0];
-
-            if (!outerRing || outerRing.length < 3) {
-                return;
-            }
-
-            const shape = new THREE.Shape();
-
-            outerRing.forEach((coord, index) => {
-
-                const x = (coord[0] - MAP_CENTER_LON) * MAP_SCALE;
-
-                const y = (coord[1] - MAP_CENTER_LAT) * MAP_SCALE;
-
-                if (index === 0) {
-                    shape.moveTo(x, y);
-                } else {
-                    shape.lineTo(x, y);
-                }
-
-            });
-
-            shape.closePath();
-
-            // Handle islands and polygon holes
-            for (let ringIndex = 1; ringIndex < polygonCoordinates.length; ringIndex++) {
-
-                const ring = polygonCoordinates[ringIndex];
-
-                const hole = new THREE.Path();
-
-                ring.forEach((coord, index) => {
-
-                    const x = (coord[0] - MAP_CENTER_LON) * MAP_SCALE;
-
-                    const y = (coord[1] - MAP_CENTER_LAT) * MAP_SCALE;
-
-                    if (index === 0) {
-                        hole.moveTo(x, y);
-                    } else {
-                        hole.lineTo(x, y);
-                    }
-
-                });
-
-                hole.closePath();
-
-                shape.holes.push(hole);
-
-            }
-
-            // Map fill temporarily disabled
-
-        }
-
-        const japanGeometry = japan.geometry;
-
-        if (japanGeometry.type === "Polygon") {
-
-            createPolygon(japanGeometry.coordinates);
-
-        } else if (japanGeometry.type === "MultiPolygon") {
-
-            japanGeometry.coordinates.forEach(polygon => {
-                createPolygon(polygon);
-            });
-
-        }
-
-        console.log("Japan geographical map loaded successfully");
-
-        status.textContent = "Loading earthquake data...";
+        status.textContent =
+            "Japan terrain loaded. Loading earthquake data...";
 
     } catch (error) {
 
-        console.error("Japan map loading error:", error);
+        console.error("Terrain loading error:", error);
 
-        status.textContent = "Map loading failed";
+        status.textContent = "Terrain loading failed";
 
     }
 
 }
-
 // ======================================================
 // EARTHQUAKE POINTS
 // ======================================================
