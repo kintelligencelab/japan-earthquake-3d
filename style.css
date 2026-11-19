@@ -264,19 +264,23 @@ aside::-webkit-scrollbar-thumb {
 
 @media (max-width: 700px) {
     #app {
-        grid-template-columns: 1fr !important;
-    }
-
+    grid-template-rows: auto auto auto auto auto !important;
+    height: auto !important;
+    overflow: visible !important;
+}
     #controls {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     grid-column: 1 !important;
     grid-row: 2 !important;
+
     height: auto !important;
-    min-height: auto !important;
+    min-height: 400px !important;
+    max-height: none !important;
+
     overflow: visible !important;
-    padding: 12px !important;
-    gap: 12px !important;
+    padding: 20px !important;
+    gap: 20px !important;
 }
 
     main {
