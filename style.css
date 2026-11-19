@@ -265,47 +265,26 @@ aside::-webkit-scrollbar-thumb {
 @media (max-width: 700px) {
 
     #app {
-    height: auto;
-    min-height: 100vh;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(400px, 1fr) auto auto;
-}
-
-    header {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    #controls {
-        grid-column: 1;
-        grid-row: 2;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        padding: 12px;
-        border-right: none;
-    }
-
-    main {
-        grid-column: 1;
-        grid-row: 3;
+        height: auto !important;
+        min-height: 100vh;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto auto auto !important;
+        overflow: visible !important;
     }
 
     #insights {
-        display: block;
-        grid-column: 1;
-        grid-row: 4;
-        width: 100%;
-        min-height: 900px;
-        padding: 20px;
+        display: block !important;
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+        height: auto !important;
+        min-height: 600px !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding-bottom: 40px !important;
     }
 
     #info {
-        grid-column: 1;
-        grid-row: 5;
-    }
-
-    h1 {
-        font-size: 14px;
+        grid-column: 1 !important;
+        grid-row: 5 !important;
     }
 }
