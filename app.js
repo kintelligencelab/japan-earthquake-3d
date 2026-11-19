@@ -262,7 +262,8 @@ async function loadJapanMap() {
             metalness: 0,
             side: THREE.DoubleSide,
             transparent: true,
-            opacity: 1
+            opacity: 1,
+            depthWrite: false
         });
 
         // Create terrain mesh
