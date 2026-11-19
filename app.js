@@ -2,6 +2,32 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 import {OrbitControls} from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 const scene=new THREE.Scene(); scene.background=new THREE.Color("#080d16");
+// Japan geographical outline
+const japanShape = new THREE.Shape();
+japanShape.moveTo(-200, -250);
+japanShape.lineTo(-150, -180);
+japanShape.lineTo(-100, -100);
+japanShape.lineTo(-50, 0);
+japanShape.lineTo(0, 100);
+japanShape.lineTo(50, 200);
+japanShape.lineTo(100, 250);
+japanShape.lineTo(150, 200);
+japanShape.lineTo(120, 100);
+japanShape.lineTo(80, 0);
+japanShape.lineTo(40, -100);
+japanShape.lineTo(0, -200);
+japanShape.lineTo(-100, -300);
+japanShape.lineTo(-200, -250);
+
+const japanGeometry = new THREE.ShapeGeometry(japanShape);
+const japanMaterial = new THREE.MeshBasicMaterial({
+    color: 0x263b4d,
+    side: THREE.DoubleSide
+});
+
+const japanMesh = new THREE.Mesh(japanGeometry, japanMaterial);
+japanMesh.position.y = -4;
+scene.add(japanMesh);
 const camera=new THREE.PerspectiveCamera(50,1,0.1,5000); camera.position.set(0,450,900);
 const renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2)); document.getElementById("scene").appendChild(renderer.domElement);
 const controls=new OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.target.set(0,0,0);
