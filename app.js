@@ -10,6 +10,8 @@ const controls=new OrbitControls(camera,renderer.domElement); controls.enableDam
 scene.add(new THREE.AmbientLight(0xffffff,1.1)); const light=new THREE.DirectionalLight(0xffffff,1.4);light.position.set(300,500,500);scene.add(light);
 const grid=new THREE.GridHelper(900,18,0x182536,0x182536);
 grid.position.y=-5;
+const grid=new THREE.GridHelper(900,18,0x182536,0x182536);
+grid.position.y=-5;
 scene.add(grid);
 let rows=[], points, geometry, material, filtered=[];
 const bounds={latMin:24,latMax:46,lonMin:122,lonMax:150};
