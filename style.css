@@ -268,9 +268,16 @@ aside::-webkit-scrollbar-thumb {
     }
 
     #controls {
-        grid-column: 1 !important;
-        grid-row: 2 !important;
-    }
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    padding: 12px !important;
+    gap: 12px !important;
+}
 
     main {
         grid-column: 1 !important;
