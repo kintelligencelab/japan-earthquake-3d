@@ -346,8 +346,8 @@ const endYear = Number(document.getElementById("yearMax").value);
             record.depth <= maxDepth &&
             earthquakeYear >= startYear &&
             earthquakeYear <= endYear
-);
-        );
+            );
+      
 
     });
 
