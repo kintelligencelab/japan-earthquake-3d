@@ -9,7 +9,6 @@ const renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setPixelRatio
 const controls=new OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.target.set(0,0,0);
 scene.add(new THREE.AmbientLight(0xffffff,1.1)); const light=new THREE.DirectionalLight(0xffffff,1.4);light.position.set(300,500,500);scene.add(light);
 const grid=new THREE.GridHelper(900,18,0x26394e,0x182536);grid.position.y=-5;scene.add(grid);
-const axes=new THREE.AxesHelper(250);scene.add(axes);
 let rows=[], points, geometry, material, filtered=[];
 const bounds={latMin:24,latMax:46,lonMin:122,lonMax:150};
 function mapPoint(r){const x=(r.longitude-136)*30;const z=-(r.latitude-36)*30;const y=-Math.min(r.depth,700)*0.65;return [x,y,z]}
