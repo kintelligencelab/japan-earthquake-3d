@@ -122,7 +122,8 @@ async function loadJapanMap() {
         const indices = [];
 
         // Vertical exaggeration
-        const terrainScale = 0.0035;
+        const landScale = 0.003;
+        const oceanScale = 0.0003;
 
         function getTerrainColour(elevation) {
 
@@ -196,7 +197,9 @@ async function loadJapanMap() {
                     -(latitude - MAP_CENTER_LAT) *
                     MAP_SCALE;
 
-                const y = elevation * terrainScale;
+               const y = elevation >= 0
+                ? elevation * landScale
+                : elevation * oceanScale;
 
                 positions.push(x, y, z);
 
