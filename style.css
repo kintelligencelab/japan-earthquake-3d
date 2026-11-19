@@ -266,11 +266,12 @@ aside::-webkit-scrollbar-thumb {
 
     #app {
         grid-template-columns: 1fr;
-        grid-template-rows: 70px 150px 1fr 100px;
+        grid-template-rows: 70px auto minmax(400px, 1fr) auto auto;
     }
 
     header {
         grid-column: 1;
+        grid-row: 1;
     }
 
     #controls {
@@ -283,48 +284,24 @@ aside::-webkit-scrollbar-thumb {
         border-right: none;
     }
 
-    #insights {
-        
-    }
-
     main {
         grid-column: 1;
         grid-row: 3;
     }
 
-    #info {
+    #insights {
+        display: block;
         grid-column: 1;
         grid-row: 4;
+        width: 100%;
+    }
+
+    #info {
+        grid-column: 1;
+        grid-row: 5;
     }
 
     h1 {
         font-size: 14px;
     }
-}
-
-
-.data-sources {
-    margin-top: auto;
-    font-size: 11px;
-    color: #8193a9;
-    line-height: 1.6;
-    border-top: 1px solid #26364b;
-    padding-top: 12px;
-}
-
-.data-sources p {
-    margin: 4px 0;
-}
-
-.data-sources strong {
-    color: #b9c7d8;
-}
-
-.data-sources a {
-    color: #62b7ff;
-    text-decoration: none;
-}
-
-.data-sources a:hover {
-    text-decoration: underline;
 }
